@@ -1,4 +1,4 @@
-// A Java program to find if a graph is biconnected and print it's articulation points(if not biconnected)
+// A Java program to find if a graph is biconnected and print its articulation points(if not biconnected)
 import java.util.*;
 
 class Graph {
@@ -26,8 +26,7 @@ class Graph {
 
 		// Go through all vertices adjacent to this
 		for (Integer v : adj.get(u)) {
-			// If v is not visited yet, then make it a child of u
-			// in DFS tree and recur for it
+			// If v is not visited yet, then make it a child of u in the DFS tree and recur for it
 			if (!visited[v]) {
 				children++;
 				APUtil(adj, v, visited, disc, low, u, isAP);
@@ -36,20 +35,19 @@ class Graph {
 				// a connection to one of the ancestors of u
 				low[u] = Math.min(low[u], low[v]);
 
-				// If u is not root and low value of one of
-				// its child is more than discovery value of u.
+				// If u is not root and the low value of one of its children is more than the discovery value of u.
 				if (parent != -1 && low[v] >= disc[u]){
 					isAP[u] = true;
                     flag= true;
                 }
 			}
 
-			// Update low value of u for parent function calls.
+			// Update the low value of u for parent function calls.
 			else if (v != parent)
 				low[u] = Math.min(low[u], disc[v]);
 		}
 
-		// If u is root of DFS tree and has two or more children.
+		// If u is the root of the DFS tree and has two or more children.
 		if (parent == -1 && children > 1){
 			isAP[u] = true;
             flag=true;
@@ -66,7 +64,7 @@ class Graph {
         boolean connected=true;
         
         
-        // To find articulation/ point in given graph. We do DFS traversal
+        // To find articulation/ point in the given graph. We do DFS traversal
         // starting from vertex 0
 		APUtil(adj, 0, visited, disc, low, parent, isAP);
 
@@ -121,7 +119,7 @@ class Graph {
 
         Random random = new Random();
 
-		// Creating random graph with number of vertices V
+		// Creating a random graph with the number of vertices V
         int[] n={10,100,200,300,400,500,600,700,800,900,1000};//Values for number of vertices
        for(int x=0;x<n.length;++x){
 		    int V = n[x];
@@ -136,7 +134,7 @@ class Graph {
                     
                         Double randomValue = random.nextDouble();
 
-                        if (randomValue <0.3) { //0.3 is used as edge probability, can be adjusted according to number of vertices 
+                        if (randomValue <0.3) { //0.3 is used as edge probability, can be adjusted according to the number of vertices 
                             addEdge(adj,i, j);
                             ++ecount;
                             //System.out.println(i+ "<--->" + j);
